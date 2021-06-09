@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -41,8 +42,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin();
 
         http
+                // SessionCreationPolicy.ALWAYS : 시큐리티가 항상 세션 생성
+                // SessionCreationPolicy.IF_REQUIRED : 필요시 생성(기본값)
+                // SessionCreationPolicy.Never : 생성하지않지만 이미 존재하면 사용
+                // SessionCreationPolicy.Stateless : 시큐리티가 생성하지않고 존재해도 사용하지않음
                 .sessionManagement()
-                .sessionFixation().changeSessionId();
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED);
 
     }
 }
