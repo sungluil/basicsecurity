@@ -16,8 +16,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("user")
                 .password("{noop}1111")//{noop}평문으로 그대로 암호화없이 패스워드 set
                 .roles("USER");
-        auth.inMemoryAuthentication().withUser("sys").password("{noop}1111").roles("SYS");
-        auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN");
+        auth.inMemoryAuthentication().withUser("sys").password("{noop}1111").roles("SYS", "USER");
+        auth.inMemoryAuthentication().withUser("admin").password("{noop}1111").roles("ADMIN", "SYS", "USER");
     }
 
     @Override
